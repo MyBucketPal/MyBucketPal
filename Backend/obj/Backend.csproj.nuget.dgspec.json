@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programing\\bucket-list-app\\Backend\\Backend.csproj": {}
+    "D:\\MyBucketPal\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "D:\\Programing\\bucket-list-app\\Backend\\Backend.csproj": {
+    "D:\\MyBucketPal\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programing\\bucket-list-app\\Backend\\Backend.csproj",
+        "projectUniqueName": "D:\\MyBucketPal\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "D:\\Programing\\bucket-list-app\\Backend\\Backend.csproj",
+        "projectPath": "D:\\MyBucketPal\\Backend\\Backend.csproj",
         "packagesPath": "C:\\Users\\Felhasználó\\.nuget\\packages\\",
-        "outputPath": "D:\\Programing\\bucket-list-app\\Backend\\obj\\",
+        "outputPath": "D:\\MyBucketPal\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Felhasználó\\AppData\\Roaming\\NuGet\\NuGet.Config",

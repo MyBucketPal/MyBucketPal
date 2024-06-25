@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "izDWY824Rl1RYsN0CcUpSG6lF68eNhGvrKdVjOhZoI2jiFn7IYcpVdd6a2HvTuwVN52CDMMA4ga7ttHCPsoVrg==",
+  "dgSpecHash": "FkMghrCku2BzotUlpHx0wD7F7vpr8Gwv2EMARP5t96k8Dqi1H6LG51+gMdYLkQx7N0fGkgA4siCqZYe8fcDJzA==",
   "success": true,
-  "projectFilePath": "D:\\Programing\\bucket-list-app\\Backend\\Backend.csproj",
+  "projectFilePath": "D:\\MyBucketPal\\Backend\\Backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Felhasználó\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\Felhasználó\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
