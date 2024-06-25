@@ -23,6 +23,7 @@ namespace Backend.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IActionResult Get()
         {
+            
             return Ok(_configuration["ApiKey"]);
         }
     }
