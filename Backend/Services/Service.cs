@@ -20,5 +20,6 @@ public class Service
     public async Task<IEnumerable<Plan>> PlansByCity(string city)
     {
         return await _unitOfWork.Plans.FindAsync(p => p.City == city);
+        //teszt team
     }
 }
