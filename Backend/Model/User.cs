@@ -10,6 +10,5 @@ public class User
     public DateTime BirthDate { get; set; }
     
     //miben van benne - amiben userId-val hivatkoznak
-    public ICollection<PlanDetail> PlanDetails { get; set; }
     public ICollection<Subscriber> Subscribers { get; set; }
 }

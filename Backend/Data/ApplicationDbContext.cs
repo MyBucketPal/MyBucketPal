@@ -1,16 +1,14 @@
 using Backend.Model;
 using Type = Backend.Model.Type;
-
-
-namespace Backend.Data;
 using Microsoft.EntityFrameworkCore;
 
+namespace Backend.Data;
 
 public class ApplicationDbContext : DbContext
 {
     private readonly IConfiguration _configuration;
 
-    protected ApplicationDbContext(IConfiguration configuration)
+    public ApplicationDbContext(IConfiguration configuration)
     {
         _configuration = configuration;
     }
@@ -23,8 +21,9 @@ public class ApplicationDbContext : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(_configuration.GetConnectionString( "DefaultConnection"));
+        optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
     // set at : dotnet user-secrets set "ConnectionStrings:DefaultConnection" "YOUR CONNECTION STRING"
+        base.OnConfiguring(optionsBuilder);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -43,12 +42,6 @@ public class ApplicationDbContext : DbContext
             .HasOne(p => p.Type)
             .WithMany(p => p.Plans)
             .HasForeignKey(p => p.TypeId)
-            ;
-
-        modelBuilder.Entity<PlanDetail>()
-            .HasOne(p => p.User)
-            .WithMany(u => u.PlanDetails)
-            .HasForeignKey(pd => pd.UserId)
             ;
 
         modelBuilder.Entity<PlanDetail>()

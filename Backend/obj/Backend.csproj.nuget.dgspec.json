@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\macko\\OneDrive\\Dokumentumok\\suli\\codecool\\practise\\4_dotNet\\MyBucketPal\\Backend\\Backend.csproj": {}
+    "D:\\MyBucketPal\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\macko\\OneDrive\\Dokumentumok\\suli\\codecool\\practise\\4_dotNet\\MyBucketPal\\Backend\\Backend.csproj": {
+    "D:\\MyBucketPal\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\macko\\OneDrive\\Dokumentumok\\suli\\codecool\\practise\\4_dotNet\\MyBucketPal\\Backend\\Backend.csproj",
+        "projectUniqueName": "D:\\MyBucketPal\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "C:\\Users\\macko\\OneDrive\\Dokumentumok\\suli\\codecool\\practise\\4_dotNet\\MyBucketPal\\Backend\\Backend.csproj",
-        "packagesPath": "C:\\Users\\macko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\macko\\OneDrive\\Dokumentumok\\suli\\codecool\\practise\\4_dotNet\\MyBucketPal\\Backend\\obj\\",
+        "projectPath": "D:\\MyBucketPal\\Backend\\Backend.csproj",
+        "packagesPath": "C:\\Users\\Felhasználó\\.nuget\\packages\\",
+        "outputPath": "D:\\MyBucketPal\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\macko\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Felhasználó\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,19 +34,26 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.0-preview.5.24306.3, )"
+              "version": "[8.0.6, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[9.0.0-preview.5.24306.3, )"
+              "version": "[8.0.6, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -70,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,4 +1,7 @@
 using Backend.Data;
+using Backend.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,14 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile("appsettings.json");
 builder.Configuration.AddUserSecrets<Program>();
-
+builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-builder.Services.AddDbContext<ApplicationDbContext>();
+
 
 var app = builder.Build();
 

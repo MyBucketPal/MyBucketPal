@@ -3,9 +3,6 @@ namespace Backend.Model;
 public class PlanDetail
 {
     public int DetailId { get; set; }
-   
-    public int UserId { get; set; }
-    public User User { get; set; }
     
     public int PlanId { get; set; }
     public Plan Plan { get; set; }
