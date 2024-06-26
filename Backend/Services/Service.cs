@@ -21,5 +21,6 @@ public class Service
     {
         return await _unitOfWork.Plans.FindAsync(p => p.City == city);
         //teszt team
+        //teszt tomi
     }
 }
