@@ -43,7 +43,7 @@ public class Repository<T> : IRepository<T> where T : class
 
     public bool Remove(T entity)
     {
-        var reult = Context.Set<T>().FirstOrDefault(entity);
+        var reult = Context.Set<T>().Find(entity);
         if (reult == null)
         {
             return false;

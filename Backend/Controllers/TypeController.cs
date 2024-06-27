@@ -28,7 +28,7 @@ public class TypeController : ControllerBase
     
     
             [HttpGet]
-            [Route("/type")]
+            [Route("/type/{id}")]
             public async Task<ActionResult<Plan>> GetType(int id)
             {
                 var t = await _unitOfWork.Types.GetByIdAsync(id);
