@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 using Backend.Data;
 using Backend.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Backend.Services.Repositories;
 
@@ -40,14 +41,26 @@ public class Repository<T> : IRepository<T> where T : class
         await Context.Set<T>().AddRangeAsync(entities);
     }
 
-    public void Remove(T entity)
+    public bool Remove(T entity)
     {
+        var reult = Context.Set<T>().FirstOrDefault(entity);
+        if (reult == null)
+        {
+            return false;
+        }
         Context.Set<T>().Remove(entity);
+        return true;
 
     }
 
     public void RemoveRange(IEnumerable<T> entities)
     {
         Context.Set<T>().RemoveRange(entities);
+    }
+
+    public  EntityEntry<T> Update(T entity)
+    {
+        var r =   Context.Set<T>().Update(entity);
+        return r;
     }
 }
