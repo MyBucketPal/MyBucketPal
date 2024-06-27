@@ -68,11 +68,10 @@ namespace Backend.Controllers
             }
 
             //külön szál vagy se?
-            var result = _unitOfWork.PlanDetails.Remove(planDetail);
-
+            _unitOfWork.Types.Remove(id);
             await _unitOfWork.CompleteAsync();
 
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPost]

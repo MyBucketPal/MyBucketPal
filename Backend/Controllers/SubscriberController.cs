@@ -66,11 +66,10 @@ namespace Backend.Controllers
                 return NotFound("nothing found on this id");
             }
 
-            var result = _unitOfWork.Subscribers.Remove(subscriber);
-
+            _unitOfWork.Types.Remove(id);
             await _unitOfWork.CompleteAsync();
 
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPost]
