@@ -66,20 +66,20 @@ namespace Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DetailId"));
 
-                    b.Property<bool>("Completed")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("DateFrom")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateTo")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPrivate")
+                        .HasColumnType("bit");
+
                     b.Property<int>("PlanId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Private")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("SubscriptionDate")
                         .HasColumnType("datetime2");

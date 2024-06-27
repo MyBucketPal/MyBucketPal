@@ -1,0 +1,6 @@
+
+in terminal add automapper
+dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
+
+//MAPPER DTO in program.cs
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

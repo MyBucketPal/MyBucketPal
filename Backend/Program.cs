@@ -1,5 +1,7 @@
 using Backend.Data;
+using Backend.Repository;
 using Backend.Services;
+using Backend.Services.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -15,7 +17,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+//IRepository genreric types
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+//MAPPER DTO
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 var app = builder.Build();
