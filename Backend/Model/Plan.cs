@@ -14,7 +14,7 @@ public class Plan
   
     public string Description { get; set; }
     public DateTime CreatedAt { get; set; }
-    public bool Private { get; set; }
+    public bool IsPrivate { get; set; }
 
     [JsonIgnore]
     public ICollection<PlanDetail> PlanDetails { get; set; }
