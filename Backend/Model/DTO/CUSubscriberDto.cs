@@ -1,8 +1,7 @@
 namespace Backend.Model.DTO;
 
-public class SubsribersDto
+public class CUSubscriberDto
 {
-    public int SubscriberId { get; set; }
     public int PlanDetailId { get; set; }
     public PlanDetail PlanDetail { get; set; }
 }

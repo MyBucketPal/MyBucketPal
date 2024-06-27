@@ -60,7 +60,7 @@ public class TypeController : ControllerBase
             }
     
             [HttpDelete]
-            [Route("/type/delete")]
+            [Route("/type/delete/{id}")]
             public async Task<ActionResult> DeleteType(int id)
             {
                 var type = await _unitOfWork.Types.GetByIdAsync(id);
@@ -70,18 +70,18 @@ public class TypeController : ControllerBase
                 }
                 
                 //külön szál vagy se?
-                var result = _unitOfWork.Types.Remove(type);
+                _unitOfWork.Types.Remove(id);
                 
                 await _unitOfWork.CompleteAsync();
     
-                return Ok(result);
+                return Ok();
             }
             
             [HttpPost]
             [Route("/type/update")]
             public async Task<ActionResult<TypeDto>> UpdateType([FromBody] TypeDto typeDto)
             {
-                var type = _mapper.Map<Type>(typeDto);
+                Type type = _mapper.Map<Type>(typeDto);
                 var updateType =   _unitOfWork.Types.Update(type);
                 await _unitOfWork.CompleteAsync();
                 var updatedDto = _mapper.Map<TypeDto>(updateType.Entity);

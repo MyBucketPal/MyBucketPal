@@ -1,6 +1,6 @@
 namespace Backend.Model.DTO;
 
-public class PlanDetialDto
+public class PlanDetailDto
 {
     public int DetailId { get; set; }
     public int PlanId { get; set; }

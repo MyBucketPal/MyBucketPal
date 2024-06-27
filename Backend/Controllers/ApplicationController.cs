@@ -28,39 +28,39 @@ namespace Backend.Controllers
         }
 
 
-        [HttpGet]
-        [Route("/plans")]
-        public async Task<ActionResult> GetPlans()
-        {
-            var result = await _unitOfWork.Plans.GetAllAsync();
-            return Ok(result);
-        }
-
-        [HttpGet]
-        [Route("/plan")]
-        public async Task<ActionResult<Plan>> GetPlan(int id)
-        {
-            var plan = await _unitOfWork.Plans.GetByIdAsync(id);
-            if (plan == null)
-            {
-                return NotFound("no plan with id");
-            }
-
-            var planDto = _mapper.Map<PlanDto>(plan);
-
-            return Ok(planDto);
-        }
-
-        [HttpPost]
-        [Route("/plan/add")]
-        public async Task<ActionResult<Plan>> AddPlan([FromBody] CUPlanDto planDto)
-        {
-            var plan = _mapper.Map<Plan>(planDto);
-            _unitOfWork.Plans.AddAsync(plan);
-            await _unitOfWork.CompleteAsync();
-            return CreatedAtAction(nameof(GetPlan), new { id = plan.PlanId }, plan);
-        }
-
+        // [HttpGet]
+        // [Route("/plans")]
+        // public async Task<ActionResult> GetPlans()
+        // {
+        //     var result = await _unitOfWork.Plans.GetAllAsync();
+        //     return Ok(result);
+        // }
+        //
+        // [HttpGet]
+        // [Route("/plan")]
+        // public async Task<ActionResult<Plan>> GetPlan(int id)
+        // {
+        //     var plan = await _unitOfWork.Plans.GetByIdAsync(id);
+        //     if (plan == null)
+        //     {
+        //         return NotFound("no plan with id");
+        //     }
+        //
+        //     var planDto = _mapper.Map<PlanDto>(plan);
+        //
+        //     return Ok(planDto);
+        // }
+        //
+        // [HttpPost]
+        // [Route("/plan/add")]
+        // public async Task<ActionResult<Plan>> AddPlan([FromBody] CUPlanDto planDto)
+        // {
+        //     var plan = _mapper.Map<Plan>(planDto);
+        //     _unitOfWork.Plans.AddAsync(plan);
+        //     await _unitOfWork.CompleteAsync();
+        //     return CreatedAtAction(nameof(GetPlan), new { id = plan.PlanId }, plan);
+        // }
+        //
 
         //     
         //     [HttpGet]

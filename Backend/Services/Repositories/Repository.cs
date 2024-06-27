@@ -41,16 +41,13 @@ public class Repository<T> : IRepository<T> where T : class
         await Context.Set<T>().AddRangeAsync(entities);
     }
 
-    public bool Remove(T entity)
+    public void Remove(int id)
     {
-        var reult = Context.Set<T>().Find(entity);
-        if (reult == null)
+        var result = Context.Set<T>().Find(id);
+        if (result != null)
         {
-            return false;
+            Context.Set<T>().Remove(result);
         }
-        Context.Set<T>().Remove(entity);
-        return true;
-
     }
 
     public void RemoveRange(IEnumerable<T> entities)
