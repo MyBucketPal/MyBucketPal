@@ -22,7 +22,8 @@ public class ApplicationDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
-    // set at : dotnet user-secrets set "ConnectionStrings:DefaultConnection" "YOUR CONNECTION STRING"
+    // set at : e
+    // "YOUR CONNECTION STRING"
         base.OnConfiguring(optionsBuilder);
     }
 
