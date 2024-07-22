@@ -1,8 +1,9 @@
 using Backend.Data;
 using Backend.Repository;
 using Backend.Services;
+using Backend.Services.Authentication;
+using Backend.Services.Authentication.TokenManager;
 using Backend.Services.Repositories;
-using Backend.Services.TokenManager;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<UserContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddScoped<UserService>();
+
 
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var issuerSigningKey = builder.Configuration["Jwt:IssuerSigningKey"];
@@ -50,7 +53,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddScoped<JwtTokenHelper>();
+builder.Services.AddScoped<TokenManager>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -76,6 +79,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -4,13 +4,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Backend.Services.TokenManager
+namespace Backend.Services.Authentication.TokenManager
 {
-    public class JwtTokenHelper
+    public class TokenManager
     {
         private readonly IConfiguration _configuration;
 
-        public JwtTokenHelper(IConfiguration configuration)
+        public TokenManager(IConfiguration configuration)
         {
             _configuration = configuration;
         }
