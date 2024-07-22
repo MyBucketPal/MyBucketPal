@@ -1,25 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\macko\\OneDrive\\Dokumentumok\\suli\\codecool\\practise\\4_dotNet\\MyBucketPal\\Backend\\Backend.csproj": {}
+    "C:\\Users\\peter\\Documents\\GitHub\\AspNET\\6TW3\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\macko\\OneDrive\\Dokumentumok\\suli\\codecool\\practise\\4_dotNet\\MyBucketPal\\Backend\\Backend.csproj": {
+    "C:\\Users\\peter\\Documents\\GitHub\\AspNET\\6TW3\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\macko\\OneDrive\\Dokumentumok\\suli\\codecool\\practise\\4_dotNet\\MyBucketPal\\Backend\\Backend.csproj",
+        "projectUniqueName": "C:\\Users\\peter\\Documents\\GitHub\\AspNET\\6TW3\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "C:\\Users\\macko\\OneDrive\\Dokumentumok\\suli\\codecool\\practise\\4_dotNet\\MyBucketPal\\Backend\\Backend.csproj",
-        "packagesPath": "C:\\Users\\macko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\macko\\OneDrive\\Dokumentumok\\suli\\codecool\\practise\\4_dotNet\\MyBucketPal\\Backend\\obj\\",
+        "projectPath": "C:\\Users\\peter\\Documents\\GitHub\\AspNET\\6TW3\\Backend\\Backend.csproj",
+        "packagesPath": "C:\\Users\\peter\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\peter\\Documents\\GitHub\\AspNET\\6TW3\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\macko\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\peter\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,6 +35,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -41,6 +49,14 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.7, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -76,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
