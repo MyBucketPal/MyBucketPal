@@ -1,0 +1,39 @@
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading.Tasks;
+
+public static class SeedData
+{
+    public static async Task Initialize(IServiceProvider serviceProvider)
+    {
+        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+        if (await roleManager.FindByNameAsync("Admin") == null)
+        {
+            await roleManager.CreateAsync(new IdentityRole("Admin"));
+        }
+
+        if (await roleManager.FindByNameAsync("User") == null)
+        {
+            await roleManager.CreateAsync(new IdentityRole("User"));
+        }
+
+        if (await roleManager.FindByNameAsync("Premium") == null)
+        {
+            await roleManager.CreateAsync(new IdentityRole("Premium"));
+        }
+
+        var adminUser = await userManager.FindByEmailAsync("admin@example.com");
+        if (adminUser == null)
+        {
+            adminUser = new IdentityUser { UserName = "admin", Email = "admin@example.com" };
+            var result = await userManager.CreateAsync(adminUser, "AdminPassword123!");
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(adminUser, "Admin");
+            }
+        }
+    }
+}

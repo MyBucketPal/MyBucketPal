@@ -6,25 +6,17 @@ namespace Backend.Data;
 
 public class ApplicationDbContext : DbContext
 {
-    private readonly IConfiguration _configuration;
-
-    public ApplicationDbContext(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
 
     public DbSet<Plan> Plans { get; set; }
     public DbSet<PlanDetail> PlanDetails { get; set; }
     public DbSet<Subscriber> Subscribers { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Type> Types { get; set; }
-    
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
     {
-        optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
-    // set at : e
-    // "YOUR CONNECTION STRING"
-        base.OnConfiguring(optionsBuilder);
+
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

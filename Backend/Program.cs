@@ -2,7 +2,7 @@ using Backend.Data;
 using Backend.Repository;
 using Backend.Services;
 using Backend.Services.Authentication;
-using Backend.Services.Authentication.TokenManager;
+using Backend.Services.Authentication.TokenService;
 using Backend.Services.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -20,9 +20,9 @@ builder.Configuration.AddUserSecrets<Program>();
 builder.Services.AddControllers();
 
 var configuration = builder.Configuration;
-builder.Services.AddDbContext<ApplicationDbContext>(options =>options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDbContext<UserContext>(options =>options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<UserContext>()
@@ -69,6 +69,14 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 var app = builder.Build();
+
+/*
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await SeedData.Initialize(services);
+}
+*/
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -1,4 +1,6 @@
-﻿using Backend.Model.DTO;
+﻿using Backend.Model;
+using Backend.Model.DTO;
+using Backend.Repository;
 using Backend.Services.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +11,12 @@ namespace Backend.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserService _userService;
+        private readonly IRepository<User> _userRepository;
 
-        public AuthController(UserService userService)
+        public AuthController(UserService userService, IRepository<User> userRepository)
         {
             _userService = userService;
+            _userRepository = userRepository;
         }
 
         [HttpPost("register")]
@@ -23,12 +27,13 @@ namespace Backend.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _userService.RegisterUser(model);
+            var result = await _userService.RegisterUser(model, "User");
 
             if (result.Succeeded)
             {
+                var user = new User { Username = model.UserName, Email = model.Email, BirthDate = model.BirthDate };
 
-                // itt hozzuk létre a usert is, 
+                await _userRepository.AddAsync(user);
 
                 return Ok("User registered successfully.");
             }
@@ -40,5 +45,24 @@ namespace Backend.Controllers
 
             return BadRequest(ModelState);
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDTO model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var token = await _userService.Login(model);
+
+            if (token != null)
+            {
+                return Ok(new { Token = token });
+            }
+
+            return Unauthorized("Invalid username or password.");
+        }
     }
+
 }

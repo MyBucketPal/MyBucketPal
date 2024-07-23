@@ -2,6 +2,7 @@
 using Backend.Model;
 using Backend.Model.DTO;
 using Backend.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Plan = Backend.Model.Plan;
 
@@ -40,7 +41,8 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("/plan/all")]
-        public async Task<ActionResult<IEnumerable<PlanDto>>> GetAllType()
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<IEnumerable<PlanDto>>> GetAllPlans()
         {
             var plans = await _unitOfWork.Plans.GetAllAsync();
             var planDtos = _mapper.Map<IEnumerable<PlanDto>>(plans);
