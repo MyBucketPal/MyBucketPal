@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Backend.Migrations.User
+namespace Backend.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20240723140932_InitialCreateFinal1")]
-    partial class InitialCreateFinal1
+    [Migration("20240723143951_InitialCreateUser")]
+    partial class InitialCreateUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

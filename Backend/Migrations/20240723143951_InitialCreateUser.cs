@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Backend.Migrations.User
+namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class initialuser : Migration
+    public partial class InitialCreateUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

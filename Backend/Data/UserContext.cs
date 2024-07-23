@@ -12,11 +12,5 @@ namespace Backend.Data
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=localhost,1433;Database=MyBucketPal;User Id=sa;Password=yourStrong(!)Password;Encrypt=false;");
-        }
-
-
     }
 }
