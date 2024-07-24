@@ -54,7 +54,7 @@ public class TypeController : ControllerBase
             public async Task<ActionResult<Type>> AddType([FromBody] CUTypeDto typeDto)
             {
                 var type = _mapper.Map<Type>(typeDto);
-                _unitOfWork.Types.AddAsync(type);
+                await _unitOfWork.Types.AddAsync(type);
                 await _unitOfWork.CompleteAsync();
                 return CreatedAtAction(nameof(GetType), new { id = type.TypeId }, type);
             }

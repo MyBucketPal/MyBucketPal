@@ -2,6 +2,7 @@ using Backend.Model;
 using Type = Backend.Model.Type;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Backend.Data;
 
 public class ApplicationDbContext : DbContext
