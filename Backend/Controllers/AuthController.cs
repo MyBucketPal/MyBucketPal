@@ -12,12 +12,13 @@ namespace Backend.Controllers
     {
         private readonly UserService _userService;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserRepository _userRepository;
 
-        public AuthController(UserService userService, IUnitOfWork unitOfWork)
+        public AuthController(UserService userService, IUnitOfWork unitOfWork, IUserRepository userRepository)
         {
             _userService = userService;
             _unitOfWork = unitOfWork;
-           
+            _userRepository = userRepository;
         }
 
         [HttpPost("register")]
@@ -70,10 +71,11 @@ namespace Backend.Controllers
 
                 Response.Cookies.Append("jwt", token, cookieOptions);
 
-
                 //Get users details here
+                var data = await _userRepository.FindUsersByEmailAsync(model.Email);
+                var userData = data.ToList()[0];
 
-                return Ok("Login successful.");
+                return Ok(userData);
             }
 
             return Unauthorized("Invalid username or password.");

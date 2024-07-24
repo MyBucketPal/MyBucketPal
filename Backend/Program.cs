@@ -33,6 +33,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
     builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+    services.AddScoped<IUserRepository, UserRepository>();
 
     // Add controllers and Swagger
     services.AddControllers();
