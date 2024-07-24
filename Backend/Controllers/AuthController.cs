@@ -60,7 +60,20 @@ namespace Backend.Controllers
 
             if (token != null)
             {
-                return Ok(new { Token = token });
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true, // Set to true in production
+                    SameSite = SameSiteMode.Strict,
+                    Expires = DateTime.UtcNow.AddMinutes(30)
+                };
+
+                Response.Cookies.Append("jwt", token, cookieOptions);
+
+
+                //Get users details here
+
+                return Ok("Login successful.");
             }
 
             return Unauthorized("Invalid username or password.");
