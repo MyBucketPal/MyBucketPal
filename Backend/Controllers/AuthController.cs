@@ -11,13 +11,12 @@ namespace Backend.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserService _userService;
-        private readonly IUnitOfWork _unitOfWork;
+      
         private readonly IUserRepository _userRepository;
 
-        public AuthController(UserService userService, IUnitOfWork unitOfWork, IUserRepository userRepository)
+        public AuthController(UserService userService, IUserRepository userRepository)
         {
             _userService = userService;
-            _unitOfWork = unitOfWork;
             _userRepository = userRepository;
         }
 
@@ -34,10 +33,9 @@ namespace Backend.Controllers
             if (result.Succeeded)
             {
                 var user = new User { Username = model.UserName, Email = model.Email, BirthDate = model.BirthDate };
-
-                await _unitOfWork.Users.AddAsync(user);
-                await _unitOfWork.CompleteAsync();
-
+                await _userRepository.AddAsync(user);
+                await _userRepository.CompleteAsync();
+               
                 return Ok("User registered successfully.");
             }
 

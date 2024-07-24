@@ -14,5 +14,14 @@ public class UserRepository : Repository<User>, IUserRepository
     {
         return await FindAsync(user => user.Email == email);
     }
-    
+
+    public async Task AddAsync(User entity)
+    {
+       await Context.AddAsync(entity);
+    }
+
+    public async Task<int> CompleteAsync()
+    {
+        return await Context.SaveChangesAsync();
+    }
 }
