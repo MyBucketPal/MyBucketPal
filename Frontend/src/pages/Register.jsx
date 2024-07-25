@@ -19,12 +19,17 @@ const Register = () => {
         e.preventDefault();
 
         try {
+            const Email = email
+            const UserName = username
+            const Password = password1
+            const ConfirmPassword = password2
+            const BirthDate = birthDate
             const response = await fetch('/api/Auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, email, password1, password2, birthDate }),
+                body: JSON.stringify({ UserName, Email, Password, ConfirmPassword, BirthDate }),
             });
 
             if (response.ok) {
