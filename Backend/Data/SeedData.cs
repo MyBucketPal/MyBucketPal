@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Backend.Data;
+using Backend.Model;
+using Backend.Repository;
+using Backend.Services.Repositories;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
@@ -9,6 +14,7 @@ public static class SeedData
     {
         var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
         var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+        var userRepository = serviceProvider.GetService<IUserRepository>();
 
         if (await roleManager.FindByNameAsync("Admin") == null)
         {
@@ -35,5 +41,13 @@ public static class SeedData
                 await userManager.AddToRoleAsync(adminUser, "Admin");
             }
         }
+
+        if ((await userRepository.FindUsersByEmailAsync("admin@example.com")).Count() == 0)
+        {
+            var admin = new User { Username = "admin", Email = "admin@example.com", BirthDate = DateTime.Parse("2000-01-01") };
+            await userRepository.AddAsync(admin);
+            await userRepository.CompleteAsync();
+        }
+        
     }
 }

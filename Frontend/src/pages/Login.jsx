@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { DataContext } from "../components/LayOut.jsx";
+import {useNavigate} from 'react-router-dom';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  //const {setGlobalData} = useContext(DataContext);
+  //const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -18,6 +23,15 @@ const Login = () => {
       });
 
       if (response.ok) {
+
+          //
+          // Set the data of the logged in user here
+          //
+          //const user = await response.json();
+          //setGlobalData(user);
+          //('/aboutus');
+
+
         setMessage('Login successful.');
       } else {
         setMessage('Login failed.');
@@ -51,6 +65,7 @@ const Login = () => {
           />
         </div>
         <button type="submit">Login</button>
+     
       </form>
       {message && <p>{message}</p>}
     </div>
