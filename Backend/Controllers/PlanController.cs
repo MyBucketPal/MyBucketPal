@@ -10,7 +10,7 @@ using Plan = Backend.Model.Plan;
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PlanController : ControllerBase
     {
         private readonly ILogger<PlanController> _logger;
@@ -27,7 +27,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        [Route("/plan/{id}")]
+        [Route("{id}")]
         public async Task<ActionResult<Plan>> GetType(int id)
         {
             var t = await _unitOfWork.Plans.GetByIdAsync(id);
@@ -40,7 +40,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        [Route("/plan/all")]
+        [Route("all")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<PlanDto>>> GetAllPlans()
         {
@@ -50,7 +50,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("/plan/add")]
+        [Route("add")]
         public async Task<ActionResult<Plan>> AddPlan([FromBody] CUPlanDto planDto)
         {
             var plan = _mapper.Map<Plan>(planDto);
@@ -60,7 +60,7 @@ namespace Backend.Controllers
         }
 
         [HttpDelete]
-        [Route("/plan/delete{id}")]
+        [Route("delete{id}")]
         public async Task<ActionResult> DeletePlan(int id)
         {
             var plan = await _unitOfWork.Plans.GetByIdAsync(id);
@@ -77,7 +77,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("/plan/update{id}")]
+        [Route("update{id}")]
         public async Task<ActionResult<PlanDto>> UpdatePlan([FromBody] PlanDto planDto)
         {
             var plan = _mapper.Map<Plan>(planDto);

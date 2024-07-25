@@ -8,7 +8,7 @@ using Subscriber = Backend.Model.Subscriber;
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class SubscriberController : ControllerBase
     {
         private readonly ILogger<TypeController> _logger;
@@ -25,7 +25,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        [Route("/subscriber/{id}")]
+        [Route("{id}")]
         public async Task<ActionResult<Subscriber>> GetType(int id)
         {
             var t = await _unitOfWork.Subscribers.GetByIdAsync(id);
@@ -38,7 +38,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        [Route("/subscriber/all")]
+        [Route("all")]
         public async Task<ActionResult<IEnumerable<SubscriberDto>>> GetAllType()
         {
             var subscribers = await _unitOfWork.Subscribers.GetAllAsync();
@@ -47,7 +47,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("/subscriber/add")]
+        [Route("add")]
         public async Task<ActionResult<Subscriber>> AddSubscriber([FromBody] CUSubscriberDto subscriberDto)
         {
             var subscriber = _mapper.Map<Subscriber>(subscriberDto);
@@ -57,7 +57,7 @@ namespace Backend.Controllers
         }
 
         [HttpDelete]
-        [Route("/subscriber/delete{id}")]
+        [Route("delete{id}")]
         public async Task<ActionResult> DeleteSubscriber(int id)
         {
             var subscriber = await _unitOfWork.Subscribers.GetByIdAsync(id);
@@ -73,7 +73,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("/subscriber/update{id}")]
+        [Route("update{id}")]
         public async Task<ActionResult<SubscriberDto>> UpdateSubscriber([FromBody] SubscriberDto subscriberDto)
         {
             var subscriber = _mapper.Map<Subscriber>(subscriberDto);

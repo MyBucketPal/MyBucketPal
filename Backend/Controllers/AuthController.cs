@@ -50,6 +50,7 @@ namespace Backend.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO model)
         {
+            Console.WriteLine(model.Email);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -63,7 +64,7 @@ namespace Backend.Controllers
                 {
                     HttpOnly = true,
                     Secure = true, // Set to true in production
-                    SameSite = SameSiteMode.Strict,
+                    SameSite = SameSiteMode.None,
                     Expires = DateTime.UtcNow.AddMinutes(30)
                 };
 

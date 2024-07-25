@@ -77,17 +77,38 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
             ValidAudience = jwtSettings["ValidAudience"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(issuerSigningKey))
         };
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                context.Token = context.Request.Cookies["jwt"];
+                return Task.CompletedTask;
+            }
+        };
     })
     .AddCookie(options =>
     {
         options.Cookie.HttpOnly = true;
         options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Set to Always in production
-        options.Cookie.SameSite = SameSiteMode.Strict;
+        options.Cookie.SameSite = SameSiteMode.None;
         options.Cookie.Name = "jwt";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
     });
 
     builder.Services.AddScoped<TokenManager>();
+
+    //Add CORS
+    builder.Services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(
+            builder =>
+            {
+                builder.WithOrigins("http://localhost:5173")
+                       .AllowAnyHeader()
+                       .AllowAnyMethod()
+                       .AllowCredentials();
+            });
+    });
 }
 
 async void ConfigureMiddleware(WebApplication app)
@@ -108,7 +129,7 @@ async void ConfigureMiddleware(WebApplication app)
     {
         HttpOnly = HttpOnlyPolicy.Always,
         Secure = CookieSecurePolicy.Always, // Set to Always in production
-        MinimumSameSitePolicy = SameSiteMode.Strict
+        MinimumSameSitePolicy = SameSiteMode.None
     });
 
     // Endpoint configuration

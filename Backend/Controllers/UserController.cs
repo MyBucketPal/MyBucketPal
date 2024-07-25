@@ -9,7 +9,7 @@ using User = Backend.Model.User;
 namespace Backend.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly ILogger<TypeController> _logger;
@@ -27,7 +27,7 @@ namespace Backend.Controllers
 
 
         [HttpGet]
-        [Route("/user/{id}")]
+        [Route("{id}")]
         public async Task<ActionResult<User>> GetType(int id)
         {
             var t = await _unitOfWork.Users.GetByIdAsync(id);
@@ -40,7 +40,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        [Route("/user/all")]
+        [Route("all")]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAllType()
         {
             var users = await _unitOfWork.Users.GetAllAsync();
@@ -49,7 +49,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("/user/add")]
+        [Route("add")]
         public async Task<ActionResult<User>> AddUser([FromBody] CUUserDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
@@ -59,7 +59,7 @@ namespace Backend.Controllers
         }
 
         [HttpDelete]
-        [Route("/user/delete{id}")]
+        [Route("delete{id}")]
         public async Task<ActionResult> DeleteUser(int id)
         {
             var user = await _unitOfWork.Users.GetByIdAsync(id);
@@ -73,7 +73,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("/user/update{id}")]
+        [Route("update{id}")]
         public async Task<ActionResult<UserDto>> UpdateUser([FromBody] UserDto userDto)
         {
             var user = _mapper.Map<User>(userDto);

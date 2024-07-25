@@ -9,7 +9,7 @@ using Type = Backend.Model.Type;
 namespace Backend.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class TypeController : ControllerBase
 {
     
@@ -28,7 +28,7 @@ public class TypeController : ControllerBase
     
     
             [HttpGet]
-            [Route("/type/{id}")]
+            [Route("{id}")]
             public async Task<ActionResult<Plan>> GetType(int id)
             {
                 var t = await _unitOfWork.Types.GetByIdAsync(id);
@@ -41,7 +41,7 @@ public class TypeController : ControllerBase
             }
             
             [HttpGet]
-            [Route("/type/all")]
+            [Route("all")]
             public async Task<ActionResult<IEnumerable<TypeDto>>> GetAllType()
             {
                 var types = await _unitOfWork.Types.GetAllAsync();
@@ -50,7 +50,7 @@ public class TypeController : ControllerBase
             }
             
             [HttpPost]
-            [Route("/type/add")]
+            [Route("add")]
             public async Task<ActionResult<Type>> AddType([FromBody] CUTypeDto typeDto)
             {
                 var type = _mapper.Map<Type>(typeDto);
@@ -60,7 +60,7 @@ public class TypeController : ControllerBase
             }
     
             [HttpDelete]
-            [Route("/type/delete/{id}")]
+            [Route("delete{id}")]
             public async Task<ActionResult> DeleteType(int id)
             {
                 var type = await _unitOfWork.Types.GetByIdAsync(id);
@@ -78,7 +78,7 @@ public class TypeController : ControllerBase
             }
             
             [HttpPost]
-            [Route("/type/update")]
+            [Route("update")]
             public async Task<ActionResult<TypeDto>> UpdateType([FromBody] TypeDto typeDto)
             {
                 Type type = _mapper.Map<Type>(typeDto);
