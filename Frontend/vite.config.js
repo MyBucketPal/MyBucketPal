@@ -6,27 +6,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://127.0.0.1:7079', // Your backend API URL
+        target: 'https://localhost:7079', 
         changeOrigin: true,
-        secure: false, // If using self-signed certificates, set this to false
-        rewrite: (path) => path.replace(/^\/api/, ''), // Rewrite path if necessary
+        secure: false, 
+
       },
     },
   },
 });
-
-/*
-export default defineConfig({
-
-  server: {
-    host: '127.0.0.1',
-    port: 5173,
-    proxy: {
-      "/api": "http://localhost:7079",
-      
-    },
-
-  },
-  plugins: [react()]
-})
-*/
