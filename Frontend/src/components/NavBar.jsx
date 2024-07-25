@@ -7,7 +7,7 @@ export default function Navbar() {
       
    
       <Link to={"/aboutus"}>
-        <button>What is it about</button>
+        <button>About us</button>
       </Link>
       <Link to={"/photos"}>
         <button>Successes</button>
@@ -17,12 +17,16 @@ export default function Navbar() {
       </Link>
        
         <>
-          <Link to={"/signup"}>
-            <button>SignUp</button>
+          <Link to={"/register"}>
+            <button>Register</button>
           </Link>
           <Link to={"/login"}>
             <button>Login</button>
-          </Link>
+              </Link>
+              <Link to={"/test"}>
+                  <button>Test</button>
+              </Link>
+
         </>
      
     </nav>

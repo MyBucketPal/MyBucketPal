@@ -1,4 +1,4 @@
-import Login from './pages/Login';
+
 
 export default function HomePage() {
   return (
@@ -13,7 +13,6 @@ export default function HomePage() {
         <i>“The best experience of our lives”</i>
       </aside>
     </header>
-    <Login/>
     </div>
 
   );

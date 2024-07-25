@@ -1,21 +1,20 @@
 import { createContext, useState } from "react";
-import Navbar from "./NavBar.jsx";
+import NavBar from "./NavBar.jsx";
 import Footer from "./Footer.jsx";
+import { Outlet } from 'react-router-dom';
 
 
 export const DataContext = createContext(null);
 
-export default function Layout() {
-  const [globalData, setGlobalData] = useState(null);
-  
-  const handleLogout = () => {
-    setGlobalData(null);
-  };
+const Layout = () => {
+    return (
+        <div>
+            <NavBar />
+            <hr />
+            <Outlet />
+            <Footer />
+        </div>
+    );
+};
 
-  return (
-    <DataContext.Provider value={{ globalData, setGlobalData }}>
-      <Navbar username={globalData} onLogout={handleLogout} />
-      <Footer />
-    </DataContext.Provider>
-  );
-}
+export default Layout;

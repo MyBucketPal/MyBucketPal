@@ -1,15 +1,32 @@
-//import { useState } from 'react'
-
 import './App.css'
-import TestPage from './pages/Test'
-import LoginPage from './pages/Login'
+import TestPage from './pages/Test';
+import Login from './pages/Login';
+import HomePage from './pages/HomePage';
 
-  const App = () => {
-  return (
-    <div className="App">
-      <TestPage/>
-    </div>
-  );
+import LayOut from './components/LayOut';
+import { useRoutes } from 'react-router-dom';
+import AboutUs from './pages/AboutUs';
+import Register from './pages/Register';
+
+const App = () => {
+    const routes = useRoutes([
+        {
+            path: '/',
+            element: <LayOut />,
+            children: [
+                { index: true, element: <HomePage /> },
+                { path: 'login', element: <Login /> },
+                { path: 'test', element: <TestPage /> },
+                { path: 'aboutus', element: <AboutUs /> },
+                 { path: 'register', element: <Register /> }
+             
+                // Add other routes here
+            ],
+        },
+    ]);
+
+    console.log('Routes:', routes);  // Temporary logging
+    return routes;
 };
 
-export default App
+export default App;
