@@ -53,61 +53,65 @@ const Register = () => {
     };
 
     return (
-        <div>
-            <h2>Register</h2>
-            <form onSubmit={handleRegister}>
-                <div>
-                    <label>Username:</label>
-                    <input
-                        type="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password1"
-                        value={password1}
-                        onChange={(e) => setPassword1(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Comfirm Password:</label>
-                    <input
-                        type="password2"
-                        value={password2}
-                        onChange={(e) => setPassword2(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Birthdate</label>
-                    <input
-                        type="birthDate"
-                        value={birthDate}
-                        onChange={(e) => setBirthDate(e.target.value)}
-                        placeholder="YYYY-MM-DD"
-                        required
-                    />
-                </div>
-                <button type="submit">Submit</button>
-
-            </form>
-            {message && <p>{message}</p>}
+        <div className="register-container">
+          <h2 className="register-title">Register</h2>
+          <form className="register-form" onSubmit={handleRegister}>
+            <div className="form-group">
+              <label>Username:</label>
+              <input
+                className="form-input"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Email:</label>
+              <input
+                className="form-input"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Password:</label>
+              <input
+                className="form-input"
+                type="password"
+                value={password1}
+                onChange={(e) => setPassword1(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Confirm Password:</label>
+              <input
+                className="form-input"
+                type="password"
+                value={password2}
+                onChange={(e) => setPassword2(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Birthdate:</label>
+              <input
+                className="form-input"
+                type="date"
+                value={birthDate}
+                onChange={(e) => setBirthDate(e.target.value)}
+                required
+              />
+            </div>
+            <button className="submit-button" type="submit">Submit</button>
+          </form>
+          {message && <p className="message">{message}</p>}
         </div>
-    );
+      );
 };
+
 
 export default Register;

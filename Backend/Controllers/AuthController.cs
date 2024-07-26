@@ -63,7 +63,7 @@ namespace Backend.Controllers
                 var cookieOptions = new CookieOptions
                 {
                     HttpOnly = true,
-                    Secure = true, // Set to true in production
+                    Secure = true,
                     SameSite = SameSiteMode.None,
                     Expires = DateTime.UtcNow.AddMinutes(30)
                 };
@@ -78,6 +78,25 @@ namespace Backend.Controllers
             }
 
             return Unauthorized("Invalid username or password.");
+        }
+
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            if (Request.Cookies["jwt"] != null)
+            {
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true, 
+                    SameSite = SameSiteMode.Strict,
+                    Expires = DateTime.UtcNow.AddMinutes(-1)
+                };
+
+                Response.Cookies.Append("jwt", "", cookieOptions);
+            }
+
+            return Ok("Logout successful.");
         }
     }
 

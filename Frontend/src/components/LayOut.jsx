@@ -8,10 +8,11 @@ export const DataContext = createContext(null);
 
 const Layout = () => {
     return (
-        <div>
-            <NavBar />
-            <hr />
-            <Outlet />
+        <div className="container">
+            <NavBar className="header"/>
+                <main className="main">
+                <Outlet />
+                </main>
             <Footer />
         </div>
     );

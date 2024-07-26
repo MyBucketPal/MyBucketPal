@@ -2,18 +2,17 @@
 
 export default function HomePage() {
   return (
-  <div>
-  <header className="header">
-      <h1>
-        <img src="https://s3-eu-west-1.amazonaws.com/ih-materials/uploads/ironhack-skydive-logo.png" alt="IronSkydive Logo" />
-        IronSkydive
-      </h1>
-      <h2>Let the adventure begin</h2>
-      <aside className="quote">
-        <i>“The best experience of our lives”</i>
-      </aside>
-    </header>
+    <div className="homepage">
+      <header className="header">
+        <h1 className="header-title">
+          <img src="/images/bucketpal.png" alt="logo" className="header-logo" />
+          MyBucketPal
+        </h1>
+        <h2 className="header-subtitle">Let the adventure begin!</h2>
+        <aside className="quote">
+          <i>Make your goals come true!</i>
+        </aside>
+      </header>
     </div>
-
   );
 }
