@@ -1,12 +1,14 @@
-import './App.css'
-import TestPage from './pages/Test';
-import Login from './pages/Login';
-import HomePage from './pages/HomePage';
-import LayOut from './components/LayOut';
 import { useRoutes } from 'react-router-dom';
+import './App.css';
+import LayOut from './components/LayOut';
 import AboutUs from './pages/AboutUs';
-import Register from './pages/Register';
+import HomePage from './pages/HomePage';
+import Login from './pages/Login';
 import Logout from './pages/Logout';
+import Register from './pages/Register';
+import TestPage from './pages/Test';
+import TypeCreator from './pages/type/TypeCreator';
+import TypeList from './pages/type/TypeList';
 
 const App = () => {
     const routes = useRoutes([
@@ -19,7 +21,10 @@ const App = () => {
                 { path: 'test', element: <TestPage /> },
                 { path: 'aboutus', element: <AboutUs /> },
                 { path: 'register', element: <Register /> },
-                { path: 'logout', element: <Logout /> }
+                { path: 'logout', element: <Logout /> },
+
+                { path: 'typeCreator', element: <TypeCreator /> },
+                { path: 'typeList', element: <TypeList /> }
                 // Add other routes here
             ],
         },
