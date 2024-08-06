@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import PieChart from '../../components/PieChart';
 
 
 const TypeCreator = () => {
@@ -68,7 +69,7 @@ const TypeCreator = () => {
 
                     </div>
                 </form>
-        
+                <PieChart percent={29} />
              </div>)
     );
 };
