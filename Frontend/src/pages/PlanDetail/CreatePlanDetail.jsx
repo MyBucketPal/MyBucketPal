@@ -1,0 +1,168 @@
+/*
+{
+    "planId": 0,
+    "subscriptionDate": "2024-08-06T12:06:18.108Z",
+    "dateFrom": "2024-08-06T12:06:18.108Z",
+    "dateTo": "2024-08-06T12:06:18.108Z",
+    "isCompleted": true,
+    "isPrivate": true
+  }
+ */
+
+import { useEffect, useState } from "react";
+
+const CreatePlanDetail = () => {
+  const [planId, setPlanId] = useState("");
+  const [subscriptionDate, setSubscriptionsDate] = useState("");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [isPrivate, setIsPrivate] = useState(false);
+  const [plans, setPlans] = useState([]);
+  const [clickedPlan, setClickedPlan] = useState(null);
+  const [error, setError] = useState(null);
+
+  //GET ALL PLANS
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("api/Plan/all", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setPlans(data);
+          console.log(data);
+        } else {
+          const errorText = await response.text();
+          setError(`Error: ${response.status} - ${errorText}`);
+          setPlans(null);
+        }
+      } catch (err) {
+        setError(`Fetch error: ${err.message}`);
+        setPlans(null);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleClick = (plan) => {
+    setClickedPlan(plan);
+    setPlanId(plan.planId);
+    console.log(plan.planId);
+    console.log("Selected Plan:", plan);
+  };
+
+  const handleCheckboxChange = (event) => {
+    setIsPrivate(event.target.checked);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (planId == "") {
+      alert("noplan choosen");
+    }
+
+    try {
+      const response = await fetch("api/PlanDetail/planDetail/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          planId,
+          subscriptionDate,
+          dateFrom,
+          dateTo,
+          isCompleted,
+          isPrivate,
+        }),
+      });
+      if (response.ok) {
+        console.log("type added suxes");
+        // navigator("/");
+      }
+    } catch (error) {
+      console.error("message: ", error);
+    }
+  };
+
+  return (
+    <div>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Set start date</label>
+            <input
+              type="date"
+              value={dateFrom}
+              onChange={(e) => setDateFrom(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Set end date</label>
+            <input
+              type="date"
+              value={dateTo}
+              onChange={(e) => setDateTo(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Private plan</label>
+            <input
+              type="checkbox"
+              value={isPrivate}
+              onChange={handleCheckboxChange}
+            />
+          </div>
+          <div>
+            <h1>Choose your plan</h1>
+            {plans.map((plan) => (
+              <div
+                key={plan.planId}
+                style={{
+                  ...planStyle,
+                  backgroundColor:
+                    clickedPlan && clickedPlan.planId === plan.planId
+                      ? "#a3a3d3"
+                      : "#f9f9f9",
+                }}
+                onClick={() => handleClick(plan)}
+              >
+                <p>
+                  <strong>Title:</strong> {plan.title}
+                </p>
+                <p>
+                  <strong>City:</strong> {plan.city}
+                </p>
+                <p>
+                  <strong>TypeID:</strong> {plan.typeId}
+                </p>
+                <p>
+                  <strong>Description:</strong> {plan.description}
+                </p>
+              </div>
+            ))}
+          </div>
+          <button type="submit">Save Plan</button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+const planStyle = {
+  border: "1px solid #ccc",
+  color: "blue",
+  padding: "10px",
+  margin: "10px 0",
+  borderRadius: "5px",
+  backgroundColor: "#f9f9f9",
+  cursor: "pointer",
+};
+export default CreatePlanDetail;

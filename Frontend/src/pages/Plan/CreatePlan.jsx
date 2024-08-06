@@ -38,7 +38,7 @@ const CreatePlan = () => {
     console.log(fetchdata);
 
     try {
-      const response = await fetch("api/Type/add", {
+      const response = await fetch("api/Plan/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const CreatePlan = () => {
       });
       if (response.ok) {
         console.log("type added suxes");
-        navigator("/");
+        // navigator("/");
       }
     } catch (error) {
       console.error("message: ", error);
