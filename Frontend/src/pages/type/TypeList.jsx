@@ -2,6 +2,8 @@
 // itt lesz az összes adat fetch
 
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+
 
 
 async function fetchAllTypeData() {
@@ -16,19 +18,52 @@ async function fetchAllTypeData() {
         return null;
     }
 }
-async function deleteType (typeId)  {
-    return fetch(`/api/Type/delete${typeId}`, { method: "DELETE" }).then((res) => res.json())
-}
 
-const onDelete = (typeId) => {
-    console.log("Deleting type with id:", typeId);
-    deleteType(typeId);
-};
 
 
 const TypeList = () => {
     const [loading, setLoading] = useState(true);
     const [typeList, setTypeList] = useState(null);
+    const [message, setMessage] = useState('');
+    const [buttonPushed, setButtonPushed] = useState(false);
+
+    const navigate = useNavigate();
+    async function deleteType(typeId) {
+        try {
+            const response = await fetch(`/api/Type/delete${typeId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+
+                setButtonPushed(true);
+                setMessage('Type deleted');
+            } else {
+                setMessage('type not deleted');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setMessage('type delete failed.');
+        }
+    }
+
+
+
+    const onDelete = async (typeId) => {
+        console.log("Deleting type with id:", typeId);
+        deleteType(typeId);
+    };
+
+
+    const onUpdate= async (typeId) => {
+        console.log("updateing type with id:", typeId);
+        navigate(`/typeUpdater/${typeId}`);
+        
+    };
+
 
     useEffect(() => {
         fetchAllTypeData().then((data) => {
@@ -44,37 +79,44 @@ const TypeList = () => {
     }
 
     return (
-        <div>
-            <div className="Table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>TypeId</th>
-                            <th>Description</th>
-                            <th />
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {typeList && typeList.map((type) => (
-                            <tr key={type.typeId}>
-                                <td>{type.typeId}</td>
-                                <td>{type.descrition}</td>
-                                
-                                <td>
-                                    <button type="button" onClick={() => onDelete(type.typeId)}>
-                                        Delete
-                                    </button>
-
-                                </td>
-
-                            </tr>
-                        ))}
-
-                    </tbody>
-                </table>
-
+        buttonPushed ? (
+            <div>
+                {message && <p className="message">{message}</p>}
             </div>
-        </div>
+        ) :
+            (<div>
+                <div className="Table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>TypeId</th>
+                                <th>Description</th>
+                                <th />
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {typeList && typeList.map((type) => (
+                                <tr key={type.typeId}>
+                                    <td>{type.typeId}</td>
+                                    <td>{type.descrition}</td>
+
+                                    <td>
+                                        <button type="button" onClick={() => onDelete(type.typeId)}>
+                                            Delete
+                                        </button>
+                                        <button type="button" onClick={() => onUpdate(type.typeId)}>
+                                            Update
+                                        </button>
+                                    </td>
+
+                                </tr>
+                            ))}
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>)
     );
 };
 

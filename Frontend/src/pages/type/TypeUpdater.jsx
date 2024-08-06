@@ -1,13 +1,20 @@
 
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import "./TypeUpdater.css";
+
+
 
 
 const TypeUpdater = () => {
 
     const [loading, setLoading] = useState(false);
+    const [updated, setUpdated] = useState(false);
     const [description, setDescription] = useState('');
+   
     const [message, setMessage] = useState('');
 
+    const typeId = useParams().typeId;
 
 
 
@@ -17,24 +24,24 @@ const TypeUpdater = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('/api/Type/add', {
+            const response = await fetch('/api/Type/update', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ description }),
+                body: JSON.stringify({ typeId, description }),
             });
 
             if (response.ok) {
 
-                setCreated(true);
-                setMessage('Type created');
+                setUpdated(true);
+                setMessage('Type updated');
             } else {
-                setMessage('type not created');
+                setMessage('type not updated');
             }
         } catch (error) {
             console.error('Error:', error);
-            setMessage('type creation failed.');
+            setMessage('type updated failed.');
         }
     };
     if (loading) {
@@ -42,7 +49,7 @@ const TypeUpdater = () => {
     }
 
     return (
-        created ? (
+        updated ? (
             <div>
 
                 {message && <p className="message">{message}</p>}
@@ -50,8 +57,17 @@ const TypeUpdater = () => {
             </div>
 
         ) :
-            (<div>
-                <form className="CreateType" onSubmit={createType}>
+            (
+            <div>
+                <form className="CreateType" onSubmit={updateType}>
+                    <div className="control">
+                        <label htmlFor="name">Type Id</label>
+                        <input
+                            value={typeId}
+                            name="typeId"
+                            id="TypeId"
+                        />
+                    </div>
                     <div className="control">
                         <label htmlFor="name">Description:</label>
                         <input
@@ -63,11 +79,11 @@ const TypeUpdater = () => {
                     </div>
 
                     <div className="buttons">
-                        <button type="submit" >Create Type </button>
+                        <button type="submit" >Update Type </button>
 
                     </div>
                 </form>
-
+                <p>majom</p>
             </div>)
     );
 };

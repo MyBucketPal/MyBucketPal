@@ -9,6 +9,7 @@ import Register from './pages/Register';
 import TestPage from './pages/Test';
 import TypeCreator from './pages/type/TypeCreator';
 import TypeList from './pages/type/TypeList';
+import TypeUpdater from './pages/type/TypeUpdater';
 
 const App = () => {
     const routes = useRoutes([
@@ -24,7 +25,8 @@ const App = () => {
                 { path: 'logout', element: <Logout /> },
 
                 { path: 'typeCreator', element: <TypeCreator /> },
-                { path: 'typeList', element: <TypeList /> }
+                { path: 'typeList', element: <TypeList /> },
+                { path: 'typeUpdater/:typeId', element: <TypeUpdater /> }
                 // Add other routes here
             ],
         },
