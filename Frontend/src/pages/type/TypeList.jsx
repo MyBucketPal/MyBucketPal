@@ -14,7 +14,7 @@ async function fetchAllTypeData() {
         const dataJson = await response.json();
         return dataJson;
     } catch (error) {
-        console.error("Error fetching solar data:", error);
+        console.error("Error fetching type data:", error);
         return null;
     }
 }
@@ -98,7 +98,7 @@ const TypeList = () => {
                             {typeList && typeList.map((type) => (
                                 <tr key={type.typeId}>
                                     <td>{type.typeId}</td>
-                                    <td>{type.descrition}</td>
+                                    <td>{type.description}</td>
 
                                     <td>
                                         <button type="button" onClick={() => onDelete(type.typeId)}>
