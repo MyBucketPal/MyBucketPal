@@ -95,63 +95,73 @@ const CreatePlanDetail = () => {
   return (
     <div>
       <div>
-        <form onSubmit={handleSubmit}>
+        {plans && plans.length > 0 ? (
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Set start date</label>
+              <input
+                type="date"
+                value={dateFrom}
+                onChange={(e) => setDateFrom(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Set end date</label>
+              <input
+                type="date"
+                value={dateTo}
+                onChange={(e) => setDateTo(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Private plan</label>
+              <input
+                type="checkbox"
+                value={isPrivate}
+                onChange={handleCheckboxChange}
+              />
+            </div>
+            <div>
+              <div>
+                <h1>Choose your plan</h1>
+                {plans.map((plan) => (
+                  <div
+                    key={plan.planId}
+                    style={{
+                      ...planStyle,
+                      backgroundColor:
+                        clickedPlan && clickedPlan.planId === plan.planId
+                          ? "#a3a3d3"
+                          : "#f9f9f9",
+                    }}
+                    onClick={() => handleClick(plan)}
+                  >
+                    <p>
+                      <strong>Title:</strong> {plan.title}
+                    </p>
+                    <p>
+                      <strong>City:</strong> {plan.city}
+                    </p>
+                    <p>
+                      <strong>TypeID:</strong> {plan.typeId}
+                    </p>
+                    <p>
+                      <strong>Description:</strong> {plan.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            {plans && <button type="submit">Save Plan</button>}
+          </form>
+        ) : (
           <div>
-            <label>Set start date</label>
-            <input
-              type="date"
-              value={dateFrom}
-              onChange={(e) => setDateFrom(e.target.value)}
-            />
+            <p>Please login to set up your dreams</p>
+            <Link to="/login">
+              <button>Login</button>
+            </Link>
           </div>
-          <div>
-            <label>Set end date</label>
-            <input
-              type="date"
-              value={dateTo}
-              onChange={(e) => setDateTo(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Private plan</label>
-            <input
-              type="checkbox"
-              value={isPrivate}
-              onChange={handleCheckboxChange}
-            />
-          </div>
-          <div>
-            <h1>Choose your plan</h1>
-            {plans &&
-              plans.map((plan) => (
-                <div
-                  key={plan.planId}
-                  style={{
-                    ...planStyle,
-                    backgroundColor:
-                      clickedPlan && clickedPlan.planId === plan.planId
-                        ? "#a3a3d3"
-                        : "#f9f9f9",
-                  }}
-                  onClick={() => handleClick(plan)}
-                >
-                  <p>
-                    <strong>Title:</strong> {plan.title}
-                  </p>
-                  <p>
-                    <strong>City:</strong> {plan.city}
-                  </p>
-                  <p>
-                    <strong>TypeID:</strong> {plan.typeId}
-                  </p>
-                  <p>
-                    <strong>Description:</strong> {plan.description}
-                  </p>
-                </div>
-              ))}
-          </div>
-          <button type="submit">Save Plan</button>
-        </form>
+        )}
       </div>
     </div>
   );

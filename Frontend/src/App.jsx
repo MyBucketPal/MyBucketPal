@@ -14,6 +14,8 @@ import TypeUpdater from "./pages/type/TypeUpdater";
 import Photos from "./pages/Photos";
 import CreatePlanDetail from "./pages/PlanDetail/CreatePlanDetail";
 import CreatePlan from "./pages/Plan/CreatePlan";
+import AllPlans from "./pages/Plan/AllPlans";
+import PlanEditor from "./pages/Plan/PlanEditor";
 
 const App = () => {
   const routes = useRoutes([
@@ -39,6 +41,14 @@ const App = () => {
         {
           path: "createPlan",
           element: <CreatePlan />,
+        },
+        {
+          path: "plans",
+          element: <AllPlans />,
+        },
+        {
+          path: "planEdit/:planId",
+          element: <PlanEditor />,
         },
 
         // Add other routes here

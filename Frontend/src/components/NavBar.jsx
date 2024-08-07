@@ -27,6 +27,9 @@ export default function Navbar() {
       <Link to={"/createPlanDetail"}>
         <button>PlanDetail</button>
       </Link>
+      <Link to={"/createPlan"}>
+        <button>Plan</button>
+      </Link>
     </nav>
   );
 }

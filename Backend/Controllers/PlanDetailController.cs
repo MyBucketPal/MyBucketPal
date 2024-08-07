@@ -75,7 +75,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("update{id}")]
+        [Route("update")]
         public async Task<ActionResult<PlanDetailDto>> UpdatePlanDetail([FromBody] PlanDetailDto planDetailDto)
         {
             var planDetail = _mapper.Map<PlanDetail>(planDetailDto);
