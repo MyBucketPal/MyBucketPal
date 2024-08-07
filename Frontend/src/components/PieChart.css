@@ -28,7 +28,7 @@
     width: 200px;
     height: 200px;
     clip: rect(0, 100px, 200px, 0);
-    background: #81CE97;
+    background: orangered;
     transform: rotate(60deg);
 }
 
@@ -57,7 +57,7 @@
         display: block;
         font-size: 2.6em;
         font-weight: bold;
-        color: #81CE97;
+        color: orangered;
     }
 
 .pcc-percents-wrapper {
