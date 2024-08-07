@@ -67,9 +67,11 @@ const CreatePlanDetail = () => {
     if (planId == "") {
       alert("noplan choosen");
     }
+    var subscriptionInput = new Date();
+    setSubscriptionsDate(subscriptionInput);
 
     try {
-      const response = await fetch("api/PlanDetail/planDetail/add", {
+      const response = await fetch("api/PlanDetail/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
