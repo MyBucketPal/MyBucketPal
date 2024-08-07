@@ -10,13 +10,12 @@
  */
 
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const CreatePlanDetail = () => {
   const [planId, setPlanId] = useState("");
-  const [subscriptionDate, setSubscriptionsDate] = useState("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
-  const [isCompleted, setIsCompleted] = useState(false);
   const [isPrivate, setIsPrivate] = useState(false);
   const [plans, setPlans] = useState([]);
   const [clickedPlan, setClickedPlan] = useState(null);
@@ -64,11 +63,10 @@ const CreatePlanDetail = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (planId == "") {
       alert("noplan choosen");
     }
-    var subscriptionInput = new Date();
-    setSubscriptionsDate(subscriptionInput);
 
     try {
       const response = await fetch("api/PlanDetail/add", {
@@ -78,10 +76,10 @@ const CreatePlanDetail = () => {
         },
         body: JSON.stringify({
           planId,
-          subscriptionDate,
+          subscriptionDate: new Date().toISOString(),
           dateFrom,
           dateTo,
-          isCompleted,
+          isCompleted: false,
           isPrivate,
         }),
       });
@@ -124,32 +122,33 @@ const CreatePlanDetail = () => {
           </div>
           <div>
             <h1>Choose your plan</h1>
-            {plans.map((plan) => (
-              <div
-                key={plan.planId}
-                style={{
-                  ...planStyle,
-                  backgroundColor:
-                    clickedPlan && clickedPlan.planId === plan.planId
-                      ? "#a3a3d3"
-                      : "#f9f9f9",
-                }}
-                onClick={() => handleClick(plan)}
-              >
-                <p>
-                  <strong>Title:</strong> {plan.title}
-                </p>
-                <p>
-                  <strong>City:</strong> {plan.city}
-                </p>
-                <p>
-                  <strong>TypeID:</strong> {plan.typeId}
-                </p>
-                <p>
-                  <strong>Description:</strong> {plan.description}
-                </p>
-              </div>
-            ))}
+            {plans &&
+              plans.map((plan) => (
+                <div
+                  key={plan.planId}
+                  style={{
+                    ...planStyle,
+                    backgroundColor:
+                      clickedPlan && clickedPlan.planId === plan.planId
+                        ? "#a3a3d3"
+                        : "#f9f9f9",
+                  }}
+                  onClick={() => handleClick(plan)}
+                >
+                  <p>
+                    <strong>Title:</strong> {plan.title}
+                  </p>
+                  <p>
+                    <strong>City:</strong> {plan.city}
+                  </p>
+                  <p>
+                    <strong>TypeID:</strong> {plan.typeId}
+                  </p>
+                  <p>
+                    <strong>Description:</strong> {plan.description}
+                  </p>
+                </div>
+              ))}
           </div>
           <button type="submit">Save Plan</button>
         </form>

@@ -48,7 +48,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("/planDetail/add")]
+        [Route("add")]
         public async Task<ActionResult<PlanDetail>> AddPlanDetail([FromBody] CUPlanDetailDto planDetailDto)
         {
             var planDetail = _mapper.Map<PlanDetail>(planDetailDto);
