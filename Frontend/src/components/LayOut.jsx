@@ -1,6 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import NavBar from "./NavBar.jsx";
-import Footer from "./Footer.jsx";
+//import Footer from "./Footer.jsx";
 import { Outlet } from 'react-router-dom';
 
 
@@ -13,7 +13,7 @@ const Layout = () => {
                 <main className="main">
                 <Outlet />
                 </main>
-            <Footer />
+           {/* <Footer />*/}
         </div>
     );
 };

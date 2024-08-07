@@ -1,0 +1,75 @@
+.progress-pie-chart {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #E5E5E5;
+    position: relative;
+}
+
+    .progress-pie-chart.gt-50 {
+        background-color: #81CE97;
+    }
+
+.ppc-progress {
+    position: absolute;
+    border-radius: 50%;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 200px;
+    clip: rect(0, 200px, 200px, 100px);
+}
+
+.ppc-progress-fill {
+    position: absolute;
+    border-radius: 50%;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 200px;
+    clip: rect(0, 100px, 200px, 0);
+    background: orangered;
+    transform: rotate(60deg);
+}
+
+.progress-pie-chart.gt-50 .ppc-progress {
+    clip: rect(0, 100px, 200px, 0);
+}
+
+.progress-pie-chart.gt-50 .ppc-progress-fill {
+    clip: rect(0, 200px, 200px, 100px);
+    background: #E5E5E5;
+}
+
+.ppc-percents {
+    position: absolute;
+    border-radius: 50%;
+    left: 17.5px;
+    top: 17.5px;
+    width: 165px;
+    height: 165px;
+    background: #fff;
+    text-align: center;
+    display: table;
+}
+
+    .ppc-percents span {
+        display: block;
+        font-size: 2.6em;
+        font-weight: bold;
+        color: orangered;
+    }
+
+.pcc-percents-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+body {
+    font-family: Arial;
+    background: orange;
+}
+
+.progress-pie-chart {
+    margin: 50px auto 0;
+}
