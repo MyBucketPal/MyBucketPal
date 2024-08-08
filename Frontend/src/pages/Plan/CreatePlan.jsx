@@ -24,6 +24,8 @@ const CreatePlan = () => {
     };
     fetchTypes();
   }, []);
+  const date = new Date().toISOString();
+  console.log(date);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,6 +35,7 @@ const CreatePlan = () => {
       City: City,
       TypeId: TypeId,
       Description: Description,
+      CreatedAt: date,
       Private: Private,
     };
     console.log(fetchdata);

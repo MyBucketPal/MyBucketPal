@@ -9,8 +9,9 @@
   }
  */
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { DataContext } from "../../components/LayOut";
 
 const CreatePlanDetail = () => {
   const [planId, setPlanId] = useState("");
@@ -20,6 +21,8 @@ const CreatePlanDetail = () => {
   const [plans, setPlans] = useState([]);
   const [clickedPlan, setClickedPlan] = useState(null);
   const [error, setError] = useState(null);
+
+  const { globalData } = useContext(DataContext);
 
   //GET ALL PLANS
   useEffect(() => {
@@ -61,6 +64,25 @@ const CreatePlanDetail = () => {
     setIsPrivate(event.target.checked);
   };
 
+  const AddSubscription = async (idInDb) => {
+    const userId = globalData.userId;
+    const fetchData = {
+      PlanDetailId: idInDb,
+      UserId: userId,
+    };
+    const response = await fetch("api/Subscriber/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(fetchData),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -85,6 +107,10 @@ const CreatePlanDetail = () => {
       });
       if (response.ok) {
         console.log("type added suxes");
+        const data = await response.json();
+        console.log(data);
+        const idInDb = data.detailId;
+        await AddSubscription(idInDb);
         // navigator("/");
       }
     } catch (error) {
@@ -122,7 +148,7 @@ const CreatePlanDetail = () => {
               />
             </div>
             <div>
-              <div>
+              <div style={containerStyle}>
                 <h1>Choose your plan</h1>
                 {plans.map((plan) => (
                   <div
@@ -167,6 +193,14 @@ const CreatePlanDetail = () => {
   );
 };
 
+const containerStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "stretch",
+  maxHeight: "80vh", // maximum height of the container
+  overflowY: "auto", // enable vertical scrolling
+};
+
 const planStyle = {
   border: "1px solid #ccc",
   color: "blue",
@@ -176,4 +210,5 @@ const planStyle = {
   backgroundColor: "#f9f9f9",
   cursor: "pointer",
 };
+
 export default CreatePlanDetail;

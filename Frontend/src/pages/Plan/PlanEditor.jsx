@@ -46,15 +46,15 @@ export default function PlanEditor() {
       City: City,
       TypeId: TypeId,
       Description: Description,
-      CreatedAt: plan.createdAt,
-      Private: Private,
+      createdAt: plan.createdAt,
+      private: Private,
     };
     console.log(fetchdata);
     console.log("planid");
     console.log(plan.planId);
 
     try {
-      const response = await fetch(`api/Plan/update`, {
+      const response = await fetch(`../api/Plan/update`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

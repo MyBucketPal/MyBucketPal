@@ -1,6 +1,6 @@
 import { useRoutes } from "react-router-dom";
 import "./App.css";
-import LayOut from "./components/LayOut";
+import LayOut, { DataContext } from "./components/LayOut";
 import NoNavBarLayOut from "./components/NoNavBarLayOut";
 import AboutUs from "./pages/AboutUs";
 import HomePage from "./pages/HomePage";
@@ -16,8 +16,10 @@ import CreatePlanDetail from "./pages/PlanDetail/CreatePlanDetail";
 import CreatePlan from "./pages/Plan/CreatePlan";
 import AllPlans from "./pages/Plan/AllPlans";
 import PlanEditor from "./pages/Plan/PlanEditor";
+import { useState } from "react";
 
 const App = () => {
+  const [globalData, setGlobalData] = useState(null); //{userId: 1, username: 'admin', email: 'admin@example.com', premium: false, birthDate: '2000-01-01T00:00:00', …}
   const routes = useRoutes([
     {
       path: "/",
@@ -62,7 +64,11 @@ const App = () => {
   ]);
 
   console.log("Routes:", routes); // Temporary logging
-  return routes;
+  return (
+    <DataContext.Provider value={{ globalData, setGlobalData }}>
+      {routes}
+    </DataContext.Provider>
+  );
 };
 
 export default App;

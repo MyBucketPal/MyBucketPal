@@ -53,6 +53,7 @@ namespace Backend.Controllers
         [Route("add")]
         public async Task<ActionResult<Plan>> AddPlan([FromBody] CUPlanDto planDto)
         {
+            Console.WriteLine(planDto.CreatedAt);
             var plan = _mapper.Map<Plan>(planDto);
             await _unitOfWork.Plans.AddAsync(plan);
             await _unitOfWork.CompleteAsync();
