@@ -46,6 +46,8 @@ namespace Backend.Controllers
             var planDetailDtos = _mapper.Map<IEnumerable<PlanDetailDto>>(planDetails);
             return Ok(planDetailDtos);
         }
+        
+     
 
         [HttpPost]
         [Route("add")]

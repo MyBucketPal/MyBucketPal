@@ -25,10 +25,13 @@ export default function Navbar() {
         <button>Test</button>
       </Link>
       <Link to={"/createPlanDetail"}>
-        <button>PlanDetail</button>
+        <button>CreatePlanDetail</button>
       </Link>
       <Link to={"/createPlan"}>
-        <button>Plan</button>
+        <button>CreatePlan</button>
+      </Link>
+      <Link to={"/subscriptions"}>
+        <button>Subscriptions</button>
       </Link>
     </nav>
   );

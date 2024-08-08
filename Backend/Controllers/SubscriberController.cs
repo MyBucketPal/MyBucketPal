@@ -45,6 +45,7 @@ namespace Backend.Controllers
             var subscriberDtos = _mapper.Map<IEnumerable<SubscriberDto>>(subscribers);
             return Ok(subscriberDtos);
         }
+        
 
         [HttpPost]
         [Route("add")]

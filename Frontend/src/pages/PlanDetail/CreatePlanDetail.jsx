@@ -10,7 +10,7 @@
  */
 
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DataContext } from "../../components/LayOut";
 
 const CreatePlanDetail = () => {
@@ -23,6 +23,7 @@ const CreatePlanDetail = () => {
   const [error, setError] = useState(null);
 
   const { globalData } = useContext(DataContext);
+  const navigate = useNavigate();
 
   //GET ALL PLANS
   useEffect(() => {
@@ -111,7 +112,7 @@ const CreatePlanDetail = () => {
         console.log(data);
         const idInDb = data.detailId;
         await AddSubscription(idInDb);
-        // navigator("/");
+        //navigate("/subscriptions");
       }
     } catch (error) {
       console.error("message: ", error);
