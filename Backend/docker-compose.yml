@@ -1,0 +1,32 @@
+﻿version: '2.29.0'
+
+services:
+  webapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7079:80"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db;Database=MyBucketPal;User Id=sa;Password=YOUR_PASSWORD123!;Encrypt=False;
+      - JWT__ValidIssuer=https://localhost:7079
+      - JWT__ValidAudience=https://localhost:7079
+      - JWT__IssuerSigningKey=OSkczr0vGdqcqQyrZWAJxyVxQoDeo5d0
+
+  db:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      SA_PASSWORD: "YOUR_PASSWORD123!"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    healthcheck: #Isn't running at proper time, have to be fixed
+      test: ["CMD", "echo", "Health check always passes"]
+      interval: 10s
+      retries: 5
+      start_period: 90s  
+      timeout: 5s

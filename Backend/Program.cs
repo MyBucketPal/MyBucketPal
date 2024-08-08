@@ -9,19 +9,23 @@ using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+// Add configuration files and secrets
 builder.Configuration.AddJsonFile("appsettings.json");
 builder.Configuration.AddUserSecrets<Program>();
 
 ConfigureServices(builder.Services, builder.Configuration);
 
 var app = builder.Build();
+
+// Ensure the application listens on all network interfaces
+app.Urls.Add("http://0.0.0.0:80");
 
 ConfigureMiddleware(app);
 
@@ -30,9 +34,9 @@ app.Run();
 void ConfigureServices(IServiceCollection services, IConfiguration configuration)
 {
     // Application services
-    builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-    builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-    builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+    services.AddScoped<IUnitOfWork, UnitOfWork>();
+    services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+    services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     services.AddScoped<IUserRepository, UserRepository>();
 
     // Add controllers and Swagger
@@ -42,10 +46,10 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 
     // Configure Application DbContext
     var connectionString = configuration.GetConnectionString("DefaultConnection");
-    builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+    services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
     // Configure Identity DbContext
-    builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+    services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
 
     // Add Identity services
     services.AddIdentity<IdentityUser, IdentityRole>()
@@ -57,7 +61,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 
     // JWT Configuration
     var jwtSettings = configuration.GetSection("Jwt");
-    var issuerSigningKey = configuration["Jwt:IssuerSigningKey"];
+    var issuerSigningKey = jwtSettings["IssuerSigningKey"];
 
     // Add authentication services with JWT and Cookies
     services.AddAuthentication(options =>
@@ -95,10 +99,10 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
         options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
     });
 
-    builder.Services.AddScoped<TokenManager>();
+    services.AddScoped<TokenManager>();
 
-    //Add CORS
-    builder.Services.AddCors(options =>
+    // Add CORS
+    services.AddCors(options =>
     {
         options.AddDefaultPolicy(
             builder =>
@@ -122,6 +126,11 @@ async void ConfigureMiddleware(WebApplication app)
 
     // Middleware configuration
     app.UseHttpsRedirection();
+    app.UseStaticFiles(); // Serve static files from wwwroot
+
+    app.UseRouting();
+    app.UseCors();
+
     app.UseAuthentication();
     app.UseAuthorization();
 
@@ -135,15 +144,19 @@ async void ConfigureMiddleware(WebApplication app)
     // Endpoint configuration
     app.MapControllers();
 
+    // Fallback to serve index.html for SPA
+    app.MapFallbackToFile("index.html");
+
     // Seed data
     using (var scope = app.Services.CreateScope())
     {
-        var services = scope.ServiceProvider;
-        SeedData.Initialize(services).GetAwaiter().GetResult();
-    }
+        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var userContext = scope.ServiceProvider.GetRequiredService<UserContext>();
 
-    using (var scope = app.Services.CreateScope())
-    {
+        dbContext.Database.Migrate();
+
+        userContext.Database.Migrate();
+
         var services = scope.ServiceProvider;
         await SeedData.Initialize(services);
     }

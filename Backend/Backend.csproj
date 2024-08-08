@@ -9,7 +9,12 @@
 
   <ItemGroup>
     <None Remove="Data\NewFile.txt" />
+    <None Remove="Dockerfile" />
     <None Remove="Model\DTO\NewFile.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Dockerfile" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +27,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
