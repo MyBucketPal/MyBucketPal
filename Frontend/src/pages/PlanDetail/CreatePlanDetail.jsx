@@ -23,6 +23,7 @@ const CreatePlanDetail = () => {
   const [error, setError] = useState(null);
 
   const { globalData } = useContext(DataContext);
+  console.log(globalData);
   const navigate = useNavigate();
 
   //GET ALL PLANS
@@ -66,21 +67,29 @@ const CreatePlanDetail = () => {
   };
 
   const AddSubscription = async (idInDb) => {
-    const userId = globalData.userId;
-    const fetchData = {
-      PlanDetailId: idInDb,
-      UserId: userId,
-    };
-    const response = await fetch("api/Subscriber/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(fetchData),
-    });
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
+    try {
+      if (globalData) {
+        console.log("addsubscriberrsben");
+        const userId = globalData.userId;
+        const fetchData = {
+          PlanDetailId: idInDb,
+          UserId: userId,
+        };
+        const response = await fetch("api/Subscriber/add", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(fetchData),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+        }
+      }
+    } catch (err) {
+      setError(`Fetch error: ${err.message}`);
+      setPlans(null);
     }
   };
 
@@ -118,6 +127,10 @@ const CreatePlanDetail = () => {
       console.error("message: ", error);
     }
   };
+
+  if (!globalData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>

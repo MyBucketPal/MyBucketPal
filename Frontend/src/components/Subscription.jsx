@@ -14,18 +14,13 @@ export default function Subscription({ subscriptions, handleClick }) {
             onClick={handleClick(subscription)}
           >
             <p>
-              <strong>Title:</strong> {subscription.planDetailsDto.dateFrom}
+              <strong>From:</strong> {subscription.planDetailsDto.dateFrom}
             </p>
             <p>
-              <strong>City:</strong> {subscription.planDetailsDto.dateTo}
+              <strong>To:</strong> {subscription.planDetailsDto.dateTo}
             </p>
             <p>
-              <strong>TypeID:</strong>{" "}
-              {subscription.planDetailsDto.plansDto.city}
-            </p>
-            <p>
-              <strong>Description:</strong>{" "}
-              {subscription.planDetailsDto.typeDercription}
+              <strong>City:</strong> {subscription.planDetailsDto.plansDto.city}
             </p>
           </div>
         ))}

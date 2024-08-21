@@ -34,6 +34,9 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     services.AddScoped<IUserRepository, UserRepository>();
+    
+    //helper funkcion: get info, claims from token
+    services.AddSingleton<ITokenExtractor, TokenExtractor>();
 
     // Add controllers and Swagger
     services.AddControllers();
@@ -65,6 +68,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     })
+        //incoming authentication
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
@@ -86,6 +90,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
             }
         };
     })
+        //outgoing settings
     .AddCookie(options =>
     {
         options.Cookie.HttpOnly = true;

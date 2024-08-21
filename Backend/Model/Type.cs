@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Backend.Model;
 
 public class Type
@@ -7,5 +9,6 @@ public class Type
     
     
     //miben van benne
+    [JsonIgnore]
     public ICollection<Plan> Plans { get; set; }
 }

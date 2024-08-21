@@ -9,7 +9,7 @@ public class Plan
     public string City { get; set; }
   
     public int TypeId { get; set; }
-    [JsonIgnore]
+    //[JsonIgnore]
     public Type Type { get; set; } //navigáció, amire az id mutat
   
     public string Description { get; set; }

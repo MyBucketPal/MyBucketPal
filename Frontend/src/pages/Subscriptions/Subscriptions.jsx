@@ -19,7 +19,7 @@ export default function Subscriptions() {
   }, []);
 
   const handleClick = (subscription) => {
-    console.log(subscription.subscriberId);
+    var xx = subscription.subscriberId;
   };
 
   return (

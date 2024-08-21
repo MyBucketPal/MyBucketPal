@@ -18,6 +18,7 @@ import AllPlans from "./pages/Plan/AllPlans";
 import PlanEditor from "./pages/Plan/PlanEditor";
 import { useState } from "react";
 import Subscriptions from "./pages/Subscriptions/Subscriptions";
+import UserSubscriptions from "./pages/Subscriptions/UserSubscriptions";
 
 const App = () => {
   const [globalData, setGlobalData] = useState(null); //{userId: 1, username: 'admin', email: 'admin@example.com', premium: false, birthDate: '2000-01-01T00:00:00', …}
@@ -56,6 +57,10 @@ const App = () => {
         {
           path: "subscriptions",
           element: <Subscriptions />,
+        },
+        {
+          path: "userSubscriptions",
+          element: <UserSubscriptions />,
         },
 
         // Add other routes here

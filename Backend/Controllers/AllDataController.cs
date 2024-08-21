@@ -1,8 +1,11 @@
 using System.Collections;
+using System.IdentityModel.Tokens.Jwt;
 using Backend.Data;
 using Backend.Model;
 using Backend.Model.DTO;
 using Backend.Model.DTO.PlandetailExtended;
+using Backend.Services.Authentication.TokenService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +17,12 @@ namespace Backend.Controllers;
 public class AllDataController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly ITokenExtractor _tokenExtractor;
 
-    public AllDataController(ApplicationDbContext context)
+    public AllDataController(ApplicationDbContext context, ITokenExtractor tokenExtractor)
     {
         _context = context;
+        _tokenExtractor = tokenExtractor;
     }
 
     [HttpGet("all")]
@@ -53,7 +58,7 @@ public class AllDataController : ControllerBase
 
     }
     
-    [HttpGet("allSubscribers")]
+    [HttpGet("allSubscribers"), Authorize(Roles = ("Admin, User"))]
     public async Task<ActionResult<IEnumerable<PlanDetailsDto>>> GetAllSubsribers()
     {
         var query = _context.Subscribers
@@ -97,9 +102,35 @@ public class AllDataController : ControllerBase
         return Ok(subscribers);
 
     }
-    
-   
-    
-   
+
+    [HttpGet("MySubscriptions"), Authorize(Roles = ("Admin, User"))]
+    public async Task<ActionResult<IEnumerable<PlanDetail>>> MySubscribedPlans()
+    {
+        var token = HttpContext.Request.Cookies["jwt"];
+       
+        if (string.IsNullOrEmpty(token))
+        {
+            return Unauthorized();
+        }
+        
+        var email = _tokenExtractor.GetEmailFromToken(token);
+        
+        if (email == null)
+        {
+            return Unauthorized();
+        }
+        
+        
+        var subscriptions = await _context.Subscribers
+            .Include(s => s.User)
+            .Include(s => s.PlanDetail)
+            .ThenInclude(pd=>pd.Plan)
+            .ThenInclude(p=>p.Type)
+            .Where(c => c.User.Email == email)
+            .Select(t => t.PlanDetail).ToListAsync();
+        
+        
+        return Ok(subscriptions);
+    }
 }
     
