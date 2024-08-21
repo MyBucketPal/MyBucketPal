@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Backend.Model;
 
 public class PlanDetail
@@ -15,6 +17,7 @@ public class PlanDetail
     public bool IsPrivate { get; set; }
     
     //
+    [JsonIgnore]
     public ICollection<Subscriber> Subscribers { get; set; }
     
 }

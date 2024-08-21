@@ -132,5 +132,54 @@ public class AllDataController : ControllerBase
         
         return Ok(subscriptions);
     }
+
+    [HttpGet("SubbscribersOnMySubscriptions"), Authorize(Roles = ("Admin, User"))]
+    public async Task<ActionResult<IEnumerable<PlanDetailWithSubscribersViewModel>>> SubscribersList()
+    {
+        var token = HttpContext.Request.Cookies["jwt"];
+       
+        if (string.IsNullOrEmpty(token))
+        {
+            return Unauthorized();
+        }
+        
+        var email = _tokenExtractor.GetEmailFromToken(token);
+        
+        if (email == null)
+        {
+            return Unauthorized();
+        }
+
+        var subscription = await _context.Subscribers
+            .Include(s => s.PlanDetail)
+            .ThenInclude(p=>p.Plan)
+            .ThenInclude(p=>p.Type)
+            .Include(s=>s.User)
+            .Where(s => s.User.Email == email).ToListAsync();
+
+        var result = new List<PlanDetailWithSubscribersViewModel>();
+        foreach (var sub in subscription)
+        {
+            var subscribers = await _context.Subscribers
+                .Where(s => s.PlanDetailId == sub.PlanDetailId)
+                .Select(s => s.User)
+                .ToListAsync();
+            result.Add(new PlanDetailWithSubscribersViewModel
+            {
+                PlanDetail = sub.PlanDetail,
+                Subscribers = subscribers
+            });
+        }
+
+        return Ok(result);
+    }
+    
+    
+    
 }
     
+public class PlanDetailWithSubscribersViewModel
+{
+    public PlanDetail PlanDetail { get; set; }
+    public List<User> Subscribers { get; set; }
+}
