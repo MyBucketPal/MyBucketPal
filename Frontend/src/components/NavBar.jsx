@@ -9,8 +9,8 @@ export default function Navbar() {
       <Link to={"/photos"}>
         <button>Successes</button>
       </Link>
-      <Link to={"/accomplished"}>
-        <button>Accomplished</button>
+      <Link to={"/homePage"}>
+        <button>HomePage</button>
       </Link>
       <Link to={"/register"}>
         <button>Register</button>

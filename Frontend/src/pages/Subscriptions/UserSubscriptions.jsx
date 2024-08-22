@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-
+import { DataContext } from "../../components/LayOut";
+import { useContext } from "react";
 export default function UserSubscriptions() {
   const [subscriptions, setSubscriptions] = useState("");
+    const { globalData } = useContext(DataContext);
+    console.log(globalData);
+
 
   useEffect(() => {
     const fetchData = async () => {

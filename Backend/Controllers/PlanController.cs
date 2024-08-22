@@ -41,7 +41,7 @@ namespace Backend.Controllers
 
         [HttpGet]
         [Route("all")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "User, Admin")]
         public async Task<ActionResult<IEnumerable<PlanDto>>> GetAllPlans()
         {
             var plans = await _unitOfWork.Plans.GetAllAsync();
