@@ -70,26 +70,23 @@ const CreatePlanDetail = () => {
 
   const AddSubscription = async (idInDb) => {
     try {
-      if (globalData) {
-        console.log("addsubscriberrsben");
-        const user = JSON.parse(localStorage.getItem("user"));
-        console.log(user);
-        const userId = globalData.userId;
-        const fetchData = {
-          PlanDetailId: idInDb,
-          UserId: userId,
-        };
-        const response = await fetch("api/Subscriber/add", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(fetchData),
-        });
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-        }
+      console.log("addsubscriberrsben");
+
+      const userId = user.userId;
+      const fetchData = {
+        PlanDetailId: idInDb,
+        UserId: userId,
+      };
+      const response = await fetch("api/Subscriber/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(fetchData),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
       }
     } catch (err) {
       setError(`Fetch error: ${err.message}`);
@@ -131,10 +128,6 @@ const CreatePlanDetail = () => {
       console.error("message: ", error);
     }
   };
-
-  if (!globalData) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>

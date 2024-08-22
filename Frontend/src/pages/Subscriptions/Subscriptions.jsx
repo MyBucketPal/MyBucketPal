@@ -3,11 +3,11 @@ import Subscription from "../../components/Subscription";
 
 import { DataContext } from "../../components/LayOut";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 export default function Subscriptions() {
   const [subscriptions, setSubscriptions] = useState([]);
-    const { globalData } = useContext(DataContext);
-    console.log(globalData);
-
+  const user = localStorage.getItem("user");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +24,8 @@ export default function Subscriptions() {
   }, []);
 
   const handleClick = (subscription) => {
-    var xx = subscription.subscriberId;
+    console.log(subscription);
+    navigate("/subscriberDetail", { state: { subscription } });
   };
 
   return (

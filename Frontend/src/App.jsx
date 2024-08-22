@@ -55,11 +55,11 @@ const App = () => {
           element: <PlanEditor />,
         },
         {
-          path: "subscriptions",
+          path: "bucketList",
           element: <Subscriptions />,
         },
         {
-          path: "userSubscriptions",
+          path: "MyBucketList",
           element: <UserSubscriptions />,
         },
 

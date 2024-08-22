@@ -30,8 +30,11 @@ export default function Navbar() {
       <Link to={"/createPlan"}>
         <button>CreatePlan</button>
       </Link>
-      <Link to={"/subscriptions"}>
-        <button>Subscriptions</button>
+      <Link to={"/bucketList"}>
+        <button>Bucketlist</button>
+      </Link>
+      <Link to={"/MyBucketList"}>
+        <button>My Bucketlist</button>
       </Link>
     </nav>
   );

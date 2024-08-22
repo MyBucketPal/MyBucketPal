@@ -11,7 +11,7 @@ export default function Subscription({ subscriptions, handleClick }) {
               ...planStyle,
               backgroundColor: "#f9f9f9",
             }}
-            onClick={handleClick(subscription)}
+            onClick={() => handleClick(subscription)}
           >
             <p>
               <strong>From:</strong> {subscription.planDetailsDto.dateFrom}
