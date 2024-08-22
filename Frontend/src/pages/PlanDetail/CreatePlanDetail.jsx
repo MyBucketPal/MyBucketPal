@@ -25,6 +25,8 @@ const CreatePlanDetail = () => {
   const { globalData } = useContext(DataContext);
   console.log(globalData);
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
 
   //GET ALL PLANS
   useEffect(() => {
@@ -70,6 +72,8 @@ const CreatePlanDetail = () => {
     try {
       if (globalData) {
         console.log("addsubscriberrsben");
+        const user = JSON.parse(localStorage.getItem("user"));
+        console.log(user);
         const userId = globalData.userId;
         const fetchData = {
           PlanDetailId: idInDb,

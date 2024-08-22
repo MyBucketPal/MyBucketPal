@@ -28,6 +28,7 @@ const Login = () => {
         const user = await response.json();
         console.log(user);
         setGlobalData(user);
+        localStorage.setItem("user", JSON.stringify(user));
         //('/aboutus');
 
         setMessage("Login successful.");
