@@ -19,6 +19,7 @@ import PlanEditor from "./pages/Plan/PlanEditor";
 import { useState } from "react";
 import Subscriptions from "./pages/Subscriptions/Subscriptions";
 import UserSubscriptions from "./pages/Subscriptions/UserSubscriptions";
+import SubscriptionDetail from "./components/SubscriptionDetail";
 
 const App = () => {
   const [globalData, setGlobalData] = useState(null); //{userId: 1, username: 'admin', email: 'admin@example.com', premium: false, birthDate: '2000-01-01T00:00:00', …}
@@ -61,6 +62,10 @@ const App = () => {
         {
           path: "MyBucketList",
           element: <UserSubscriptions />,
+        },
+        {
+          path: "subscriberDetail",
+          element: <SubscriptionDetail />,
         },
 
         // Add other routes here

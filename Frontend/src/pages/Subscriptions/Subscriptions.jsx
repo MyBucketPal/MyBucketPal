@@ -4,6 +4,7 @@ import Subscription from "../../components/Subscription";
 import { DataContext } from "../../components/LayOut";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
 export default function Subscriptions() {
   const [subscriptions, setSubscriptions] = useState([]);
   const user = localStorage.getItem("user");
@@ -25,6 +26,8 @@ export default function Subscriptions() {
 
   const handleClick = (subscription) => {
     console.log(subscription);
+
+    //navigate("/plans");
     navigate("/subscriberDetail", { state: { subscription } });
   };
 
