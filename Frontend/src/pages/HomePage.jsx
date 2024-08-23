@@ -1,6 +1,8 @@
 
 import { DataContext } from "../components/LayOut";
-import { useContext  } from "react";
+import { useContext } from "react";
+import "./HomePage.css";
+
 
 export default function HomePage() {
 
@@ -8,11 +10,12 @@ export default function HomePage() {
     console.log(globalData);
 
   return (
-    <div className="homepage">
+      <div className="homepage">
+          <img src="/images/bucketpal.png" alt="logo" className="header-logo" />
       <header className="header">
               <h1 className="header-title">
                   Hello {globalData && globalData.username}!
-          <img src="/images/bucketpal.png" alt="logo" className="header-logo" />
+         
                   
               </h1>
               <h1>MyBucketPal </h1>

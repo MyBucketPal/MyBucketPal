@@ -7,7 +7,7 @@ export default function Photos() {
 		
 			<h1>Enjoy you life! Find ideas! Share xp</h1>
 			<Link to={"/homePage"}>
-				<button>Back</button>
+				<button className="button">Back</button>
 			</Link>
 			
 			<section>

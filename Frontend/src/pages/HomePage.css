@@ -1,0 +1,46 @@
+.homepage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+    background: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text color */
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header-title {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #61dafb; /* React logo color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem; /* Space between text and image */
+}
+
+.header-logo {
+    width: 50px;
+    height: auto;
+}
+
+.header-subtitle {
+    font-size: 1.5rem;
+    color: #888; /* Subtitle color */
+    margin: 0;
+}
+
+.quote {
+    margin-top: 1.5rem;
+    font-style: italic;
+    color: #888; /* Quote color */
+    font-size: 1.2rem;
+    border-left: 4px solid #61dafb; /* React logo color */
+    padding-left: 1rem;
+}

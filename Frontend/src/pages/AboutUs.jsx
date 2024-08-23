@@ -6,7 +6,7 @@ export default function AboutUs() {
     <div id="AboutUs">
       
       <h1>Dream, Share, Achieve.</h1>
-      <p>
+      <p className="quote">
         Discover the ultimate app for dreamers and adventurers. 
         With our bucket list app, you can effortlessly store your goals 
         and ideas, ensuring you never lose sight of your dreams. 

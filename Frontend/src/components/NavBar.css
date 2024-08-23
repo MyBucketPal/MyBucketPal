@@ -1,0 +1,29 @@
+.Navbar {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    background-color: #1f1f1f; /* Dark background similar to the form */
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Darker shadow for contrast */
+    border-radius: 8px;
+}
+
+    .Navbar a {
+        text-decoration: none;
+    }
+
+    .Navbar button {
+        background-color: #2a2a2a; /* Slightly lighter dark background for buttons */
+        color: #e0e0e0; /* Light text color */
+        border: 2px solid #2a2a2a; /* Match the button background */
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        transition: background-color 300ms, color 300ms;
+        cursor: pointer;
+    }
+
+        .Navbar button:hover {
+            background-color: #3a3a3a; /* Lighter background on hover */
+            color: #ffffff; /* Bright text color on hover */
+        }
