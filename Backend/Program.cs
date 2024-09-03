@@ -101,19 +101,6 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     });
 
     builder.Services.AddScoped<TokenManager>();
-
-    //Add CORS
-    builder.Services.AddCors(options =>
-    {
-        options.AddDefaultPolicy(
-            builder =>
-            {
-                builder.WithOrigins("http://localhost:5173")
-                       .AllowAnyHeader()
-                       .AllowAnyMethod()
-                       .AllowCredentials();
-            });
-    });
 }
 
 async void ConfigureMiddleware(WebApplication app)
