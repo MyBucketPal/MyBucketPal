@@ -1,5 +1,7 @@
 # My Bucker Pal application
 
+![Logo](logo.png)
+
 ## Overview
 This bucket list app lets you easily store and organize your dream goals, whether they're personal ambitions or shared experiences. Explore a vast collection of ideas from other users to discover new adventures you hadn’t considered. If something catches your eye, you can express interest or join others in pursuing that goal. Likewise, you can invite friends or connect with like-minded individuals to collaborate on fulfilling your own bucket list items. With a user-friendly interface and a community-driven approach, this app transforms your aspirations into actionable plans, helping you achieve your dreams while sharing the journey with others.This is a basic chat application. The purpose to create this project to understand how to work websocket connection. This application simulated how a real chat application  work. After registration, you able to logging into the application. After that you can easily keep in touch with your friends, you should only know your friends name to create a private chat channel. You don't have to worry about losing your old messages, because all messages are saved in a database. If you want, you can add reactions (emoticons) to each message to help express yourself more easily.
 
