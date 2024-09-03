@@ -29,7 +29,7 @@ This bucket list app lets you easily store and organize your dream goals, whethe
 
 Repo: https://github.com/MyBucketPal/MyBucketPal
 
-Prerequisites:
+##Prerequisites:
 
 ### Node.js and npm
 - Ensure that Node.js (which includes npm) is installed on your machine. You can download and install it from the [official Node.js website](https://nodejs.org/).
@@ -48,7 +48,7 @@ Prerequisites:
   dotnet --version
   ```
  
-Backend:
+##Backend:
 
 ### 1. Navigate to the Backend Directory
 Go to the Backend directory from the root folder.
@@ -78,7 +78,7 @@ Run your ASP.NET Core backend project.
 dotnet run
 ```
 
-Frontend:
+##Frontend:
 
 ### 1. Navigate to the Frontend Directory
 Go to the Frontend directory from the root folder.
