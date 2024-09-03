@@ -31,12 +31,78 @@ Repo: https://github.com/MyBucketPal/MyBucketPal
 
 Prerequisites:
 
+### Node.js and npm
+- Ensure that Node.js (which includes npm) is installed on your machine. You can download and install it from the [official Node.js website](https://nodejs.org/).
+
+  ```bash
+  # To check if Node.js and npm are installed and view their versions, run:
+  node -v
+  npm -v
+  ```
+
+### .NET SDK
+- Install the .NET SDK to build and run the ASP.NET Core backend. You can download it from the [.NET SDK download page](https://dotnet.microsoft.com/download).
+
+  ```bash
+  # To check if the .NET SDK is installed and view its version, run:
+  dotnet --version
+  ```
  
 Backend:
 
+### 1. Navigate to the Backend Directory
+Go to the Backend directory from the root folder.
+
+```bash
+cd Backend
+```
+
+### 2. Install Backend Dependencies
+Restore the dependencies for your ASP.NET Core project.
+
+```bash
+dotnet restore
+```
+
+### 3. Build the Backend
+Build your ASP.NET Core backend project.
+
+```bash
+dotnet build
+```
+
+### 4. Run the Backend
+Run your ASP.NET Core backend project.
+
+```bash
+dotnet run
+```
 
 Frontend:
 
+### 1. Navigate to the Frontend Directory
+Go to the Frontend directory from the root folder.
+
+```bash
+cd Frontend
+```
+
+### 2. Install Frontend Dependencies
+Install the required npm packages for your Vite React project.
+
+```bash
+npm install
+```
+
+### 3. Run the Frontend Development Server
+Start the Vite development server for your React frontend.
+
+```bash
+npm run dev
+```
+
+### 4. Access the Frontend
+Once the development server is running, you can access your frontend by navigating to the URL displayed in your terminal, usually [http://localhost:5173](http://localhost:5173) or a similar port.
 
 ## Usage
 
