@@ -80,6 +80,9 @@ Run your ASP.NET Core backend project.
 dotnet run
 ```
 
+### 4. Access the Frontend
+Once the server is running, you can access your backend by navigation to [http://localhost:7079](http://localhost:7079) or the port displayed by the terminal.
+
 ## Frontend:
 
 ### 1. Navigate to the Frontend Directory
@@ -104,7 +107,19 @@ npm run dev
 ```
 
 ### 4. Access the Frontend
-Once the development server is running, you can access your frontend by navigating to the URL displayed in your terminal, usually [http://localhost:5173](http://localhost:5173) or a similar port.
+Once the development server is running, you can access your frontend by navigating to the URL displayed in your terminal, usually [https://localhost:5173](https://localhost:5173) or a similar port.
+
+## Docker:
+
+You can experiment with the docker composed build of the application on the 'Docker-Cloud-Tests" branch!
+
+To build and run it using docker compose:
+
+```bash
+docker-compose up --build
+```
+
+If you get an SQL error while running the application for the first time using Docker compose, you should give a bit of time for the MSSQL container to set up properly and try running the application container again.
 
 ## Usage
 
